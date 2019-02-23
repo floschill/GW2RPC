@@ -9,7 +9,7 @@ import math
 
 import psutil
 import requests
-from infi.systray import SysTrayIcon
+#from infi.systray import SysTrayIcon
 
 from .api import APIError, api  # TODO
 from .character import Character
@@ -53,9 +53,9 @@ worlds = {
 }
 
 
-def create_msgbox(description, *, title='GW2RPC', code=0):
-    MessageBox = ctypes.windll.user32.MessageBoxW
-    return MessageBox(None, description, title, code)
+#def create_msgbox(description, *, title='GW2RPC', code=0):
+#    MessageBox = ctypes.windll.user32.MessageBoxW
+#    return MessageBox(None, description, title, code)
 
 
 class GW2RPC:
@@ -85,15 +85,15 @@ class GW2RPC:
         self.game = MumbleData()
         self.registry = fetch_registry()
         self.support_invite = fetch_support_invite()
-        menu_options = (("About", None, self.about), )
-        if self.support_invite:
-            menu_options += (("Join support server", None, self.join_guild), )
-        self.systray = SysTrayIcon(
-            icon_path(),
-            "Guild Wars 2 with Discord",
-            menu_options,
-            on_quit=self.shutdown)
-        self.systray.start()
+#        menu_options = (("About", None, self.about), )
+#        if self.support_invite:
+#            menu_options += (("Join support server", None, self.join_guild), )
+#        self.systray = SysTrayIcon(
+#            icon_path(),
+#            "Guild Wars 2 with Discord",
+#            menu_options,
+#            on_quit=self.shutdown)
+#        self.systray.start()
         self.process = None
         self.last_map_info = None
         self.last_continent_info = None
@@ -105,11 +105,11 @@ class GW2RPC:
     def shutdown(self, _=None):
         os._exit(0)  # Nuclear option
 
-    def about(self, _):
-        message = (
-            "Version: {}\n\nhttps://gw2rpc.info\n\nBy Maselkov & "
-            "N1TR0\nIcons by Zebban\nWebsite by Penemue".format(VERSION))
-        threading.Thread(target=create_msgbox, args=[message]).start()
+#    def about(self, _):
+#        message = (
+#            "Version: {}\n\nhttps://gw2rpc.info\n\nBy Maselkov & "
+#            "N1TR0\nIcons by Zebban\nWebsite by Penemue".format(VERSION))
+#        threading.Thread(target=create_msgbox, args=[message]).start()
 
     def join_guild(self, _):
         try:
