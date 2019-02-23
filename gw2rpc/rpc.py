@@ -37,8 +37,10 @@ log = logging.getLogger(__name__)
 
 class DiscordRPC:
     def __init__(self, client_id):
-        self.ipc_path = r'\\?\pipe\discord-ipc-0'
-        self.loop = asyncio.ProactorEventLoop()
+        nv_vars = ['XDG_RUNTIME_DIR', 'TMPDIR', 'TMP', 'TEMP']
+        path = next((os.environ.get(path, None) for path in env_vars if path in os.environ), '/tmp')
+        self.ipc_path = f'{path}/discord-ipc-0'
+        self.loop = asyncio.get_event_loop()
         self.sock_reader: asyncio.StreamReader = None
         self.sock_writer: asyncio.StreamWriter = None
         self.client_id = client_id
